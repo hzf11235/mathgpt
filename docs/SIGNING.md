@@ -15,7 +15,7 @@ SignPath Foundation 的官网明确提供免费的开源项目签名，且不要
 
 MathGPT 主程序使用 MIT，独立适配器及所用 relaykit 保留 AGPL 声明和源码。安装包不包含原厂 harness，客户端下载和接入由用户发起。客户端支持用户配置 API 服务。开源客户端关联商业 API 服务是否被基金会接受，应由其审核，不能自行断言符合资格。
 
-本机仓库尚无公开 remote；候选为 `https://github.com/hzf11235/mathgpt`，未创建。公开 1.8.2 对应源码已有下载：`https://mathgpt.xyz/downloads/MathGPT-1.8.2-source.zip`。完整源码可独立使用 vendored Go 依赖编译，不需要服务器源码、账号或支付配置。提交时必须说明 relaykit 的修改和许可证，以及与收费 API 服务的关系；基金会对第三方 fork 的签名规则仍需其确认。
+公开仓库为 `https://github.com/hzf11235/mathgpt`，以单独审核的源码快照建立，不包含本机原有私有 Git 历史。`v1.8.2-source` 对应已发布源码，main 包含未发布的1.8.3候选。公开1.8.2源码下载：`https://mathgpt.xyz/downloads/MathGPT-1.8.2-source.zip`。完整源码可独立使用vendored Go依赖编译，不需要服务器源码、账号或支付配置。申请必须说明relaykit修改和许可证、与收费API服务的关系；基金会对第三方fork的签名规则仍需其确认。
 
 未发布的 1.8.3 候选已添加安装联网说明和独立自动更新/账号刷新开关，并使用同一策略约束 Windows 与 Mac。未选择时不执行自动联网，手动操作保留，升级保留偏好；候选的定向验证不等于正式发布或基金会接受。`docs/PRIVACY.md` 对应候选行为。公开 1.8.2 仍保留其原有行为。
 
