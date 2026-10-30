@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>MathGPT</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon Condition="Exists('Assets\MathGPT.ico')">Assets\MathGPT.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="..\MathGPT.Core\MathGPT.Core.csproj" /></ItemGroup>
+  <ItemGroup><Resource Include="Assets\MathGPT.png" /><Resource Include="Assets\MathGPT.ico" /></ItemGroup>
+</Project>

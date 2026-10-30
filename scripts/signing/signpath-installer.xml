@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Signs the outer installer after all three inner components were signed. -->
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://signpath.io/artifact-configuration/v1 https://app.signpath.io/Web/artifact-configuration/v1.xsd">
+  <parameters>
+    <parameter name="runtime" required="true" />
+  </parameters>
+  <zip-file>
+    <pe-file path="MathGPT-1.6.1-Setup-${runtime}.exe" product-name="MathGPT" product-version="1.6.1">
+      <authenticode-sign hash-algorithm="sha256" />
+    </pe-file>
+  </zip-file>
+</artifact-configuration>

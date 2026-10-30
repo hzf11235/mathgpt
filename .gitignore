@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+build/
+tmp/
+work/
+*.user
+*.suo
+*.dpapi
+.vs/

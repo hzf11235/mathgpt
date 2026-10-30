@@ -1,0 +1,9 @@
+{
+  "SchemaVersion": 1,
+  "Id": "mathgpt-desktop",
+  "Name": "MathGPT",
+  "SourceRoot": "D:\\Codex\\Projects\\mathgpt-desktop",
+  "ManagedRoot": "D:\\Codex\\Apps\\mathgpt-desktop",
+  "CurrentRoot": "D:\\Codex\\Apps\\mathgpt-desktop\\current",
+  "ArchiveRoot": "D:\\Codex\\Archive\\mathgpt-desktop"
+}

@@ -1,0 +1,141 @@
+# Preparation only: no Foundation account, approval, API token or provider run is supplied.
+name: Windows SignPath candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      runtime:
+        description: Windows architecture
+        required: true
+        default: win-x64
+        type: choice
+        options:
+          - win-x64
+          - win-arm64
+
+permissions:
+  contents: read
+
+jobs:
+  sign:
+    runs-on: windows-2025
+    timeout-minutes: 180
+    env:
+      SIGNPATH_ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+      SIGNPATH_PROJECT_SLUG: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+      SIGNPATH_SIGNING_POLICY_SLUG: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+      SIGNPATH_PAYLOAD_CONFIG_SLUG: ${{ vars.SIGNPATH_PAYLOAD_CONFIG_SLUG }}
+      SIGNPATH_INSTALLER_CONFIG_SLUG: ${{ vars.SIGNPATH_INSTALLER_CONFIG_SLUG }}
+      SIGNPATH_EXPECTED_PUBLISHER: ${{ vars.SIGNPATH_EXPECTED_PUBLISHER }}
+      SIGNPATH_CERTIFICATE_THUMBPRINT: ${{ vars.SIGNPATH_CERTIFICATE_THUMBPRINT }}
+      SIGNPATH_REPOSITORY_VISIBILITY: ${{ github.event.repository.visibility }}
+      SIGNPATH_RUNTIME: ${{ inputs.runtime }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Fail before building when signing is unconfigured
+        shell: pwsh
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+        run: |
+          ./scripts/signing/SignPathPackage.ps1 -Step Preflight
+          $work = Join-Path $env:RUNNER_TEMP "mathgpt-signpath-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          "SIGNPATH_WORKSPACE=$work" >> $env:GITHUB_ENV
+
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: 8.0.x
+
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: 1.27.3
+          cache: false
+
+      - name: Install pinned Inno Setup compiler
+        shell: pwsh
+        run: |
+          choco install innosetup --version=6.7.3 --yes --no-progress
+          if ($LASTEXITCODE -ne 0) { throw 'Inno Setup installation failed.' }
+          $compiler = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6\ISCC.exe'
+          if (-not (Test-Path -LiteralPath $compiler)) { throw 'Inno Setup compiler missing.' }
+          $compilerVersion = (Get-Item -LiteralPath $compiler).VersionInfo
+          if ($compilerVersion.FileMajorPart -ne 6 -or $compilerVersion.FileMinorPart -ne 7 -or $compilerVersion.FileBuildPart -ne 3) { throw 'Expected Inno Setup 6.7.3.' }
+          "SIGNPATH_ISCC=$compiler" >> $env:GITHUB_ENV
+
+      - name: Build unsigned payload and prepare Inno uninstaller
+        shell: pwsh
+        run: |
+          $stage = Join-Path $env:SIGNPATH_WORKSPACE 'stage'
+          ./scripts/Build.ps1 -SigningMode Preview -Runtime $env:SIGNPATH_RUNTIME -OutputDirectory $stage -GoPath (Get-Command go.exe).Source
+          ./scripts/signing/SignPathPackage.ps1 -Step PreparePayload -Runtime $env:SIGNPATH_RUNTIME -Workspace $env:SIGNPATH_WORKSPACE -InnoCompilerPath $env:SIGNPATH_ISCC
+
+      - name: Upload exactly three unsigned PE files
+        id: payload
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: mathgpt-unsigned-payload-${{ inputs.runtime }}
+          path: ${{ env.SIGNPATH_WORKSPACE }}/unsigned-payload/*.exe
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Request payload, Bridge and uninstaller signatures
+        id: sign-payload
+        uses: signpath/github-action-submit-signing-request@f6d04783b4569d051e0c80105fe66e82819d0092 # v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: ${{ vars.SIGNPATH_PAYLOAD_CONFIG_SLUG }}
+          github-artifact-id: ${{ steps.payload.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 3600
+          output-artifact-directory: ${{ env.SIGNPATH_WORKSPACE }}/signed-payload
+
+      - name: Verify all inner signatures and build installer
+        shell: pwsh
+        run: |
+          ./scripts/signing/SignPathPackage.ps1 -Step AcceptPayload -Runtime $env:SIGNPATH_RUNTIME -Workspace $env:SIGNPATH_WORKSPACE -SignedInputDirectory (Join-Path $env:SIGNPATH_WORKSPACE 'signed-payload') -InnoCompilerPath $env:SIGNPATH_ISCC
+
+      - name: Upload unsigned outer installer
+        id: installer
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: mathgpt-unsigned-installer-${{ inputs.runtime }}
+          path: ${{ env.SIGNPATH_WORKSPACE }}/unsigned-installer/*.exe
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Request final installer signature
+        id: sign-installer
+        uses: signpath/github-action-submit-signing-request@f6d04783b4569d051e0c80105fe66e82819d0092 # v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: ${{ vars.SIGNPATH_INSTALLER_CONFIG_SLUG }}
+          github-artifact-id: ${{ steps.installer.outputs.artifact-id }}
+          parameters: |
+            runtime: "${{ inputs.runtime }}"
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 3600
+          output-artifact-directory: ${{ env.SIGNPATH_WORKSPACE }}/signed-installer
+
+      - name: Verify all four components and write signature evidence
+        shell: pwsh
+        env:
+          SIGNPATH_PAYLOAD_REQUEST_ID: ${{ steps.sign-payload.outputs.signing-request-id }}
+          SIGNPATH_INSTALLER_REQUEST_ID: ${{ steps.sign-installer.outputs.signing-request-id }}
+        run: |
+          ./scripts/signing/SignPathPackage.ps1 -Step Finalize -Runtime $env:SIGNPATH_RUNTIME -Workspace $env:SIGNPATH_WORKSPACE -SignedInputDirectory (Join-Path $env:SIGNPATH_WORKSPACE 'signed-installer')
+
+      - name: Retain verified candidate without publishing a release
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: mathgpt-signature-verified-${{ inputs.runtime }}
+          path: ${{ env.SIGNPATH_WORKSPACE }}/verified-package/*
+          if-no-files-found: error
+          retention-days: 7

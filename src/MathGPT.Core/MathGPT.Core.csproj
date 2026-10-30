@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework />
+    <TargetFrameworks>net8.0-windows;net8.0</TargetFrameworks>
+    <!-- Portable entry points gate OS-specific installers; Windows code remains shared. -->
+    <NoWarn Condition="'$(TargetFramework)' == 'net8.0'">$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Tomlyn" Version="0.19.0" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.7.0" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,52 @@
+# github.com/QuantumNous/new-api/relaykit v0.0.0 => ../../feng-relay/relaykit
+## explicit; go 1.25.1
+github.com/QuantumNous/new-api/relaykit/dto
+github.com/QuantumNous/new-api/relaykit/reasonmap
+github.com/QuantumNous/new-api/relaykit/relayconvert
+github.com/QuantumNous/new-api/relaykit/relayconvert/convmeta
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/claude_messages
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/convdiag
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/gemini_chat
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/jsonutil
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/media
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/oai_chat
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/oai_responses
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/shared/claude
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/shared/gemini
+github.com/QuantumNous/new-api/relaykit/relayconvert/internal/toolconv
+github.com/QuantumNous/new-api/relaykit/relayconvert/kitutil
+github.com/QuantumNous/new-api/relaykit/relayconvert/reasoning
+github.com/QuantumNous/new-api/relaykit/types
+# github.com/google/uuid v1.6.0
+## explicit
+github.com/google/uuid
+# github.com/samber/lo v1.53.0
+## explicit; go 1.18
+github.com/samber/lo
+github.com/samber/lo/internal/constraints
+github.com/samber/lo/internal/xrand
+github.com/samber/lo/internal/xtime
+github.com/samber/lo/mutable
+# github.com/tidwall/gjson v1.19.0
+## explicit; go 1.23
+github.com/tidwall/gjson
+# github.com/tidwall/match v1.1.1
+## explicit; go 1.15
+github.com/tidwall/match
+# github.com/tidwall/pretty v1.2.0
+## explicit; go 1.16
+github.com/tidwall/pretty
+# github.com/tidwall/sjson v1.2.5
+## explicit; go 1.14
+github.com/tidwall/sjson
+# golang.org/x/text v0.35.0
+## explicit; go 1.25.0
+golang.org/x/text/cases
+golang.org/x/text/internal
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/tag
+golang.org/x/text/language
+golang.org/x/text/transform
+golang.org/x/text/unicode/norm
+# github.com/QuantumNous/new-api/relaykit => ../../feng-relay/relaykit

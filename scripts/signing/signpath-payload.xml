@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Preparation only. Register with an approved Foundation project before use. -->
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://signpath.io/artifact-configuration/v1 https://app.signpath.io/Web/artifact-configuration/v1.xsd">
+  <zip-file>
+    <pe-file path="MathGPT.exe" product-name="MathGPT" product-version="1.6.1">
+      <authenticode-sign hash-algorithm="sha256" />
+    </pe-file>
+    <pe-file path="MathGPT.Bridge.exe" product-name="MathGPT" product-version="1.6.1">
+      <authenticode-sign hash-algorithm="sha256" />
+    </pe-file>
+    <!-- Original Inno cache name and unchanged-byte SHA256 are recorded locally. -->
+    <pe-file path="MathGPT.Uninstaller.exe" product-name="MathGPT" product-version="1.6.1">
+      <authenticode-sign hash-algorithm="sha256" />
+    </pe-file>
+  </zip-file>
+</artifact-configuration>

@@ -1,0 +1,14 @@
+{
+  "Category": "AI 工具",
+  "Description": "官方桌面客户端安装与 API 连接管理。",
+  "IconPath": "D:/Codex/Projects/mathgpt-desktop/src/MathGPT.App/Assets/MathGPT.ico",
+  "DataPaths": [
+    "D:/Codex/Data/mathgpt-desktop",
+    "D:/Codex/Documents/MathGPT/Workspaces"
+  ],
+  "Version": "1.7.1",
+  "ExecutableRelativePath": "MathGPT.exe",
+  "Name": "MathGPT",
+  "Id": "mathgpt-desktop",
+  "SchemaVersion": 1
+}
