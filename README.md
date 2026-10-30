@@ -1,5 +1,7 @@
 # MathGPT 桌面端
 
+公开源码仓库：https://github.com/hzf11235/mathgpt 。`v1.8.2-source` 对应已发布源码；`main` 包含尚未发布的 1.8.3 隐私与签名准备候选。
+
 ## Code signing policy
 
 1.8.2 采用 Windows 安装向导 ZIP 和 Mac 预览 ZIP 分发，便携 ZIP 保留用于更新。MathGPT 自有程序尚未取得受信代码签名或 Mac 公证；厂商客户端保留其原始签名。

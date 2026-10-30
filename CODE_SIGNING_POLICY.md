@@ -4,11 +4,13 @@
 
 MathGPT is preparing an application for the Foundation's free open-source signing program. This document does not assert approval, sponsorship, or a signing partnership.
 
+Repository: https://github.com/hzf11235/mathgpt . The repository owner [hzf11235](https://github.com/hzf11235) maintains this project and reviews contributed changes. The same owner is the designated release approver; no independent reviewer is claimed. MFA verification and Foundation enrollment remain pending, so no production signing approval has been issued.
+
 ## Project and release controls
 
 - The public source must correspond to the distributed desktop program. The MIT desktop application and AGPL adapter retain their own notices and corresponding sources.
 - Only this project's own binaries may be signed using a future project policy. Vendor clients and runtime components retain their original publisher signatures and licensing.
-- Changes to release code and workflows require review. Maintainers, reviewers and release approvers must use MFA. The actual public repository and named account roles will be published only after the owner has approved that repository and the signing application.
+- Changes to release code and workflows require review. Maintainers, reviewers and release approvers must use MFA before production signing is enabled. The public source is published with the owner's authorization; this does not establish that MFA or Foundation enrollment has been completed.
 - Each production signing request requires explicit approval. Untrusted pull requests cannot trigger production signing.
 - Program files, the adapter, uninstaller and installer must pass signature validation before a Windows release is declared ready. Hashes are computed only from final files.
 - Failed, unsigned, test-signed or unnotarized artifacts must not be represented as production-signed releases.
