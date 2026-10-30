@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   sign:
@@ -36,11 +37,14 @@ jobs:
           persist-credentials: false
 
       - name: Fail before building when signing is unconfigured
+        id: signing_preflight
         shell: pwsh
         env:
           SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
         run: |
-          ./scripts/signing/SignPathPackage.ps1 -Step Preflight
+          $preflight = ./scripts/signing/SignPathPackage.ps1 -Step Preflight
+          "version=$($preflight.version)" >> $env:GITHUB_OUTPUT
+          $preflight
           $work = Join-Path $env:RUNNER_TEMP "mathgpt-signpath-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
           "SIGNPATH_WORKSPACE=$work" >> $env:GITHUB_ENV
 
@@ -90,6 +94,8 @@ jobs:
           signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
           artifact-configuration-slug: ${{ vars.SIGNPATH_PAYLOAD_CONFIG_SLUG }}
           github-artifact-id: ${{ steps.payload.outputs.artifact-id }}
+          parameters: |
+            version: "${{ steps.signing_preflight.outputs.version }}"
           wait-for-completion: true
           wait-for-completion-timeout-in-seconds: 3600
           output-artifact-directory: ${{ env.SIGNPATH_WORKSPACE }}/signed-payload
@@ -119,6 +125,7 @@ jobs:
           artifact-configuration-slug: ${{ vars.SIGNPATH_INSTALLER_CONFIG_SLUG }}
           github-artifact-id: ${{ steps.installer.outputs.artifact-id }}
           parameters: |
+            version: "${{ steps.signing_preflight.outputs.version }}"
             runtime: "${{ inputs.runtime }}"
           wait-for-completion: true
           wait-for-completion-timeout-in-seconds: 3600

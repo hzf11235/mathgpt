@@ -110,6 +110,42 @@ Filename: "{app}\MathGPT.exe"; Description: "启动 MathGPT"; Flags: nowait post
 ; No UninstallDelete rules: user data, workspaces and independent clients survive uninstall.
 
 [Code]
+var
+  NetworkOptionsPage: TInputOptionWizardPage;
+
+procedure InitializeWizard;
+var
+  PreferencesFile: String;
+begin
+  PreferencesFile := ExpandConstant('{localappdata}\MathGPT\Data\network-preferences.ini');
+  NetworkOptionsPage := CreateInputOptionPage(wpSelectDir, '联网选项',
+    '选择 MathGPT 的自动联网功能，可随时在帮助中更改。',
+    '自动更新会向 mathgpt.xyz 查询版本并下载更新；自动刷新会使用登录凭据查询账号、余额和模型。服务器可见 IP 等连接信息。更新请求不包含 API Key、聊天或工作文件。关闭后仍可手动检查和刷新。',
+    False, False);
+  NetworkOptionsPage.Add('自动检查更新');
+  NetworkOptionsPage.Add('自动刷新账号');
+  NetworkOptionsPage.Values[0] := GetIniString('Network', 'AutoUpdates', '1', PreferencesFile) = '1';
+  NetworkOptionsPage.Values[1] := GetIniString('Network', 'AutoAccountRefresh', '1', PreferencesFile) = '1';
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+  UpdateValue, AccountValue, Arguments: String;
+  ExitCode: Integer;
+begin
+  { Silent installation has no affirmative choice. Preserve existing settings;
+    a new headless user remains offline until the in-app options are saved. }
+  if (CurStep <> ssPostInstall) or WizardSilent then Exit;
+  if NetworkOptionsPage.Values[0] then UpdateValue := '1' else UpdateValue := '0';
+  if NetworkOptionsPage.Values[1] then AccountValue := '1' else AccountValue := '0';
+  Arguments := '--set-network-options ' + UpdateValue + ' ' + AccountValue;
+  if not Exec(ExpandConstant('{app}\MathGPT.exe'), Arguments, '', SW_HIDE,
+    ewWaitUntilTerminated, ExitCode) then
+    RaiseException('无法保存联网选项。请安装后在帮助中保存。');
+  if ExitCode <> 0 then
+    RaiseException('联网选项未保存。请安装后在帮助中保存。');
+end;
+
 function ShouldCreateShortcuts: Boolean;
 begin
   Result := ExpandConstant('{param:MATHGPT_NO_SHORTCUTS|0}') <> '1';

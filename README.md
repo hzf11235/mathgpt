@@ -2,7 +2,7 @@
 
 ## Code signing policy
 
-1.7.1 采用 Windows 便携 ZIP 和 Mac 预览 ZIP 分发，MathGPT 自有程序尚未取得受信代码签名或 Mac 公证；厂商客户端保留其原始签名。
+1.8.2 采用 Windows 安装向导 ZIP 和 Mac 预览 ZIP 分发，便携 ZIP 保留用于更新。MathGPT 自有程序尚未取得受信代码签名或 Mac 公证；厂商客户端保留其原始签名。
 签名状态与申请条件见 [签名说明](docs/SIGNING.md) 和 [Code signing policy](CODE_SIGNING_POLICY.md)。
 尚未获得 SignPath Foundation 许可或签名，不代表已能消除系统风险提示。
 

@@ -4,10 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://signpath.io/artifact-configuration/v1 https://app.signpath.io/Web/artifact-configuration/v1.xsd">
   <parameters>
+    <parameter name="version" required="true" />
     <parameter name="runtime" required="true" />
   </parameters>
   <zip-file>
-    <pe-file path="MathGPT-1.6.1-Setup-${runtime}.exe" product-name="MathGPT" product-version="1.6.1">
+    <pe-file path="MathGPT-${version}-Setup-${runtime}.exe" product-name="MathGPT" product-version="${version}">
       <authenticode-sign hash-algorithm="sha256" />
     </pe-file>
   </zip-file>

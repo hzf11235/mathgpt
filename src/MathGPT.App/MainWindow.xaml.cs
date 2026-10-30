@@ -23,7 +23,7 @@ public partial class MainWindow : Window
     private bool updateChecking;
     private bool updateClosed;
     private DateTimeOffset lastUpdateCheck;
-    public string UpdateMessage { get; private set; } = "启动时自动检查，正常关闭后完成更新。";
+    public string UpdateMessage { get; private set; } = "可手动检查更新，自动检查可在帮助中设置。";
     public event Action<string>? UpdateMessageChanged;
     public MainWindow(AppServices services)
     {
@@ -69,12 +69,15 @@ public partial class MainWindow : Window
         };
         timer.Tick += async (_, _) =>
         {
-            if (selfUpdater is not null && DateTimeOffset.UtcNow - lastUpdateCheck > TimeSpan.FromHours(6)) _ = CheckForUpdates(false);
+            if (Services.Store.Network.Allows(AutomaticNetworkOperation.Updates) && DateTimeOffset.UtcNow - lastUpdateCheck > TimeSpan.FromHours(6)) _ = CheckForUpdates(false);
             if (!Services.Site.SignedIn || Busy) return;
             try
             {
-                await Services.Site.RefreshAccount();
-                if (PageHost.Content is ConnectionsPage connections) connections.UpdateAccountLabel();
+                await Services.Store.Network.RunAutomatic(AutomaticNetworkOperation.AccountRefresh, async () =>
+                {
+                    await Services.Site.RefreshAccount();
+                    if (PageHost.Content is ConnectionsPage connections) connections.UpdateAccountLabel();
+                });
             }
             catch (Exception ex) { Status("账号同步暂停：" + Privacy.Friendly(ex), true); }
         };
@@ -92,7 +95,7 @@ public partial class MainWindow : Window
         };
         Navigate(0);
     }
-    public Task StartUpdateChecks() => CheckForUpdates(false);
+    public Task StartUpdateChecks() => Services.Store.Network.RunAutomatic(AutomaticNetworkOperation.Updates, () => CheckForUpdates(false));
     private SelfUpdateService NewSelfUpdater() => new(new SelfUpdateOptions
     {
         InstallationRoot = AppContext.BaseDirectory,
@@ -104,6 +107,7 @@ public partial class MainWindow : Window
     });
     public async Task CheckForUpdates(bool showStatus = true)
     {
+        if (!showStatus && !Services.Store.Network.Allows(AutomaticNetworkOperation.Updates)) return;
         if (updateChecking || updateClosed) return;
         updateChecking = true;
         lastUpdateCheck = DateTimeOffset.UtcNow;

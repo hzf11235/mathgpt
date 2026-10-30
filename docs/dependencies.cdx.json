@@ -1,0 +1,1046 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:ca87aa8f-518e-46e5-93d7-798364fa54e6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-30T04:24:32.445501+00:00",
+    "component": {
+      "type": "application",
+      "name": "MathGPT",
+      "version": "1.8.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "mathgpt:scope",
+        "value": "Source dependency inventory, not binary-composition attestation. macOS-only resolved dependencies are included with project labels."
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia@12.1.4",
+      "name": "Avalonia",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "565cfe79b6343c156c4c55c03c8a4cfbbc9281ecccb7227718c30699c707c315d78e02c5db1e7e34cc0ee00aab74cfe5ad43d9ade9a760d3ba312835af5beec7"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Angle.Windows.Natives@2.1.27548.20260419",
+      "name": "Avalonia.Angle.Windows.Natives",
+      "version": "2.1.27548.20260419",
+      "purl": "pkg:nuget/Avalonia.Angle.Windows.Natives@2.1.27548.20260419",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        },
+        {
+          "name": "mathgpt:license-review",
+          "value": "Check the package license file and bundled third-party notices."
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "975ee72375d50cdde8327a637f6a67989834613c0ae26e8d2ec9ff8ad0230cc74e6d317137bec3e45d4cf6c44c49f562498dca29cb1ed5139ccf082858b26c9c"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.BuildServices@11.3.2",
+      "name": "Avalonia.BuildServices",
+      "version": "11.3.2",
+      "purl": "pkg:nuget/Avalonia.BuildServices@11.3.2",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "a870d3a31b68d5ede1722e58a9b1bd9f44f2f26969df3054379c13ebac0aa9a0d5cd7c90d1da371274482dde0a7bd8e9bec92d68fa60134623124ee1a2b9ebc9"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Desktop@12.1.4",
+      "name": "Avalonia.Desktop",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.Desktop@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "dafaebd00a3beebdc1a19499e414e0eab11bf0dd3df3b870e47ea5c6d66447cb696a088e4da2fd6b7d4f8b4da32616bc7aced8fa3251f10c22b3b3cc4118f2b6"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.FreeDesktop@12.1.4",
+      "name": "Avalonia.FreeDesktop",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.FreeDesktop@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "1033369aa3be794effd202eb23239b92dfeae8388145b1926f367bd89f3b2b62474d8117b4e4ffaae3a95afe9b38ab0340604f0648c8facd0ec055313e608fd8"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.FreeDesktop.AtSpi@12.1.4",
+      "name": "Avalonia.FreeDesktop.AtSpi",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.FreeDesktop.AtSpi@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "ba5993caff83f1eba4e27e2a1574cff6fc9270d6d1cfefd2b8cadd0dea0614b416d3431ed4c180d6f05b6a20dc769f158327e87910e5abbb501adc1639ff1926"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.HarfBuzz@12.1.4",
+      "name": "Avalonia.HarfBuzz",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.HarfBuzz@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3f16892fd3ff667eb0f3d90ba24b8b7160e78fec387aba5fa79ed28833782615f8348daa3cb2449b1828813c325e309413cbeaec983b9231ffcf90f68de18084"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Native@12.1.4",
+      "name": "Avalonia.Native",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.Native@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b68ef7c826c55b344db37832b811b642446cae98e71ab115c2486d02c24b6cf00a1633ff33460379be0c3cc377c06969c0215dcfd2fc47c8808afc8d7ade7ee6"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Remote.Protocol@12.1.4",
+      "name": "Avalonia.Remote.Protocol",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.Remote.Protocol@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "f5a8c2f857fe53d4b6d4924a19b2609f0a7d7d8fb3c091be6d2102fffa3fbc953633a2043111a9f83d7e014a2a4d1efd14003f8836207f87f8105e0f64a859b2"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Skia@12.1.4",
+      "name": "Avalonia.Skia",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.Skia@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "040e81d54a7d01c5f82669ec903e85cb117e644a305c3846bf3c35946f97c7ab103b4572384db20e80260ff4b612c61952e90f7d1509988ca378cfff59d640c4"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Themes.Fluent@12.1.4",
+      "name": "Avalonia.Themes.Fluent",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.Themes.Fluent@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "bf1ecfe1ab34ed62d0a80da684ccb8881b2a8645841b0648ee0f517760e5260cf7b8a4b6b52bd8ea766a1eadec58c143058053eb98e44ec7ad3eb815f28a6bb1"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Win32@12.1.4",
+      "name": "Avalonia.Win32",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.Win32@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "37f45aef728b401a1039c9e944e59d080e3dbc21628fc312c94ecc16ff0958cc5c42f906f7c2b5f7f86675cca2a81fc1d6c05a87266e1e022ca0ef2bc9a8c2d2"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.X11@12.1.4",
+      "name": "Avalonia.X11",
+      "version": "12.1.4",
+      "purl": "pkg:nuget/Avalonia.X11@12.1.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "2cc94bdc618dee5ed57dda3035fe21cffcf265078cbd87bf1c5a61a286dbab8a350b5b61651482dddc5f4654317b6336e7d7f5f1d5ef78459dbb264bc9c5c226"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/BouncyCastle.Cryptography@2.7.0",
+      "name": "BouncyCastle.Cryptography",
+      "version": "2.7.0",
+      "purl": "pkg:nuget/BouncyCastle.Cryptography@2.7.0",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.App,MathGPT.Core,MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "53ed7675ff141161e0062d386157ff2e08b6772dd222d94862f1e38c455afc19e00902330c20d1064e740c307209f0ef49b7b9a51345af76fb52b54ada431c2f"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/HarfBuzzSharp@8.3.1.3",
+      "name": "HarfBuzzSharp",
+      "version": "8.3.1.3",
+      "purl": "pkg:nuget/HarfBuzzSharp@8.3.1.3",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "346676f9954d3ccf8d74707f6ac5b4ff29169e0c875b072a8eb6cdda70de1f507f6a9b4f1a509497cc24436712271c397dd5a076620f98db933d6a4bc0d5575a"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/HarfBuzzSharp.NativeAssets.Linux@8.3.1.3",
+      "name": "HarfBuzzSharp.NativeAssets.Linux",
+      "version": "8.3.1.3",
+      "purl": "pkg:nuget/HarfBuzzSharp.NativeAssets.Linux@8.3.1.3",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "448e80d4b826a28537d3ee1023216de6b9810b33f45734d1fb9f3b209486bd822c1c75a56a116e7e2858c6dada2dfb08856ec8f1d9fafb15fe0d91b280e3ca59"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/HarfBuzzSharp.NativeAssets.macOS@8.3.1.3",
+      "name": "HarfBuzzSharp.NativeAssets.macOS",
+      "version": "8.3.1.3",
+      "purl": "pkg:nuget/HarfBuzzSharp.NativeAssets.macOS@8.3.1.3",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "28f4ead319ec96423a9c0a348e1de9b5c40f26f659afb3166176b68d47b84a71dcf6af8994712598d5e9d2c7c5a224e0a025fb58e62962cbabca9b87f467a1c7"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/HarfBuzzSharp.NativeAssets.WebAssembly@8.3.1.3",
+      "name": "HarfBuzzSharp.NativeAssets.WebAssembly",
+      "version": "8.3.1.3",
+      "purl": "pkg:nuget/HarfBuzzSharp.NativeAssets.WebAssembly@8.3.1.3",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "c3641f74d9bd533fec51ad01e43f8e9d5421caadc6fdf06aea26d031d581950aaac21d20d3fe63dd116f62a640991679f91cef8d57bca3c48516759851292ec4"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/HarfBuzzSharp.NativeAssets.Win32@8.3.1.3",
+      "name": "HarfBuzzSharp.NativeAssets.Win32",
+      "version": "8.3.1.3",
+      "purl": "pkg:nuget/HarfBuzzSharp.NativeAssets.Win32@8.3.1.3",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "6f1f0213c26cf97197f0f5310070810c4391b7969a058b4c3781ebf5016ce7b5e2b6187aca353262a92c8b31fa7910e1264c2c188f925d698f98c9bc9590bd3f"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/MicroCom.Runtime@0.11.6",
+      "name": "MicroCom.Runtime",
+      "version": "0.11.6",
+      "purl": "pkg:nuget/MicroCom.Runtime@0.11.6",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "35d356183899e9e4bf31fffdf901d1f75723d4aec7cbe3d7f72ac723fcccef1158ba3f48593daec6d07ab021e3ae7c4078b57d7eeb7547acc70d418a5fa7fd95"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.NET.ILLink.Tasks@8.0.30",
+      "name": "Microsoft.NET.ILLink.Tasks",
+      "version": "8.0.30",
+      "purl": "pkg:nuget/Microsoft.NET.ILLink.Tasks@8.0.30",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.App"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "49f9b0b998d43c14c4a01300b1767f85691a10af682fe63f52d031ecde91c961df70cb7d274131acd3ee3a04f23db097232893045b3114dacf2c464d3e625cbc"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/SkiaSharp@3.119.4",
+      "name": "SkiaSharp",
+      "version": "3.119.4",
+      "purl": "pkg:nuget/SkiaSharp@3.119.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "e7734e49467552cfbdd529b4b829088af87f93b8cea30444ad94f6b085b03c537d98b52f7719c4eab4b8b16a38db9e7e45dd8c594485fa3d0d3191c3e8291ef9"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/SkiaSharp.NativeAssets.Linux@3.119.4",
+      "name": "SkiaSharp.NativeAssets.Linux",
+      "version": "3.119.4",
+      "purl": "pkg:nuget/SkiaSharp.NativeAssets.Linux@3.119.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "500c95cdba8d7d9b196ca6f38faf335cbc94c85fd26d32a6cd37ce3baa83bbef9db4850c313ccf05ef283aecd4fc389ec297caa14525392b099aa59ce9b97107"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/SkiaSharp.NativeAssets.macOS@3.119.4",
+      "name": "SkiaSharp.NativeAssets.macOS",
+      "version": "3.119.4",
+      "purl": "pkg:nuget/SkiaSharp.NativeAssets.macOS@3.119.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "7e004e584a9b634d76c7b80c7c95387b3833e9d7e125bdf467a61d5b7e61f396687b7f7e6bc60d6c00302f6f6284f7d6a29a60e408efc8a3730f5a02be5a96c0"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/SkiaSharp.NativeAssets.WebAssembly@3.119.4",
+      "name": "SkiaSharp.NativeAssets.WebAssembly",
+      "version": "3.119.4",
+      "purl": "pkg:nuget/SkiaSharp.NativeAssets.WebAssembly@3.119.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "4b51cec6d05b0f86d80ed0367bd587e535fe971a91ad33ef2a3ae3b6d461c671cd36eed863c545a3f2de08feed36aa1303a3d5fbcbecbcd6e6454102da2a7c45"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/SkiaSharp.NativeAssets.Win32@3.119.4",
+      "name": "SkiaSharp.NativeAssets.Win32",
+      "version": "3.119.4",
+      "purl": "pkg:nuget/SkiaSharp.NativeAssets.Win32@3.119.4",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5cea5bc7fe0245e3b6c18b2adaceab6ef75ab9ce9d9ed1b866fe3df6c1c64c9f3b6f065a157b33164c2a977f8521931cf2450f79a8f7331d9ecc8266a3c6b52a"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/System.IO.Pipelines@8.0.0",
+      "name": "System.IO.Pipelines",
+      "version": "8.0.0",
+      "purl": "pkg:nuget/System.IO.Pipelines@8.0.0",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "14734e6ad994ab4b2a24e913c7e505ffd60ad5fd7cd1c9d6e4556a9d032f6143747a5a7ac05cdbb4f4a2a9ba35febbbc202a78dc93358bb90a924e86b0d18794"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Tmds.DBus.Protocol@0.94.1",
+      "name": "Tmds.DBus.Protocol",
+      "version": "0.94.1",
+      "purl": "pkg:nuget/Tmds.DBus.Protocol@0.94.1",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d7560cafb16701b2fcddb4265719616c8287bd22f18cef350f5d848f440c4865cc0d3c4d03d31339ae0c431c78de7bf97a5fde7ee3c7c33cab8fa6b985ada0ba"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Tomlyn@0.19.0",
+      "name": "Tomlyn",
+      "version": "0.19.0",
+      "purl": "pkg:nuget/Tomlyn@0.19.0",
+      "properties": [
+        {
+          "name": "mathgpt:projects",
+          "value": "MathGPT.App,MathGPT.Core,MathGPT.Mac"
+        },
+        {
+          "name": "mathgpt:evidence",
+          "value": "resolved project.assets.json for the candidate; package versions unchanged from 1.8.2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "BSD-2-Clause"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "1a5236a3c47c8db648684f985fab80fd5a00387ef323161eab10e6ee31d6da1a9486e07eab5f682a895ddf916432ebfc2190e80aab1332895a06fd9e04b066ad"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/QuantumNous/new-api/relaykit@v0.0.0",
+      "name": "github.com/QuantumNous/new-api/relaykit",
+      "version": "v0.0.0",
+      "purl": "pkg:golang/github.com/QuantumNous/new-api/relaykit@v0.0.0",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        },
+        {
+          "name": "mathgpt:source",
+          "value": "vendored local fork; version v0.0.0 is not a public release"
+        },
+        {
+          "name": "mathgpt:provenance",
+          "value": "bridge/README.md: feng-relay 3e5afd7; relaykit last change 6757a97"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/google/uuid@v1.6.0",
+      "name": "github.com/google/uuid",
+      "version": "v1.6.0",
+      "purl": "pkg:golang/github.com/google/uuid@v1.6.0",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/samber/lo@v1.53.0",
+      "name": "github.com/samber/lo",
+      "version": "v1.53.0",
+      "purl": "pkg:golang/github.com/samber/lo@v1.53.0",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/tidwall/gjson@v1.19.0",
+      "name": "github.com/tidwall/gjson",
+      "version": "v1.19.0",
+      "purl": "pkg:golang/github.com/tidwall/gjson@v1.19.0",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/tidwall/match@v1.1.1",
+      "name": "github.com/tidwall/match",
+      "version": "v1.1.1",
+      "purl": "pkg:golang/github.com/tidwall/match@v1.1.1",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/tidwall/pretty@v1.2.0",
+      "name": "github.com/tidwall/pretty",
+      "version": "v1.2.0",
+      "purl": "pkg:golang/github.com/tidwall/pretty@v1.2.0",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/tidwall/sjson@v1.2.5",
+      "name": "github.com/tidwall/sjson",
+      "version": "v1.2.5",
+      "purl": "pkg:golang/github.com/tidwall/sjson@v1.2.5",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/golang.org/x/text@v0.35.0",
+      "name": "golang.org/x/text",
+      "version": "v0.35.0",
+      "purl": "pkg:golang/golang.org/x/text@v0.35.0",
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "bridge/vendor/modules.txt; vendored corresponding source"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/Microsoft.NET.Runtime@8.0.30",
+      "name": "Microsoft.NET.Runtime",
+      "version": "8.0.30",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "scripts/Build.ps1; .NET runtime third-party notices also apply"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/Microsoft.WindowsDesktop.App@8.0.30",
+      "name": "Microsoft.WindowsDesktop.App",
+      "version": "8.0.30",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "mathgpt:evidence",
+          "value": "WPF self-contained Windows publish; .NET runtime third-party notices also apply"
+        }
+      ]
+    }
+  ]
+}

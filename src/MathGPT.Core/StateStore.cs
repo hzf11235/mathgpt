@@ -9,12 +9,14 @@ public sealed class StateStore
     private readonly object gate = new();
     public AppState State { get; }
     public SecretVault Vault { get; }
+    public NetworkPreferences Network { get; }
     public StateStore(string root)
     {
         Root = SafeFiles.DirectoryPath(root);
         Directory.CreateDirectory(Root);
         path = SafeFiles.Child(root, "settings.json");
         Vault = new SecretVault(root);
+        Network = new NetworkPreferences(root);
         if (File.Exists(path))
         {
             try

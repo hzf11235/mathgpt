@@ -22,6 +22,10 @@ function Assert-Throws([scriptblock]$Body, [string]$Pattern) {
     try { & $Body | Out-Null } catch { $caught = $_ }
     if ($null -eq $caught -or $caught.Exception.Message -notlike $Pattern) { throw "Expected failure matching: $Pattern" }
 }
+Assert-Case 'signing version follows the checked-out release metadata' {
+    $releaseVersion = [string]([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot '../../Directory.Build.props') -Raw -Encoding UTF8)).Project.PropertyGroup.Version
+    if ($script:SignPathVersion -cne $releaseVersion -or $releaseVersion -notmatch '\A\d+\.\d+\.\d+\z') { throw 'Signing release version drifted.' }
+}
 function New-TestPe([string]$PathValue, [switch]$SignedShape, [switch]$Changed) {
     # Structure-only fixture, not a cryptographic signature or a trusted executable.
     $size = if ($SignedShape) { 544 } else { 521 }
@@ -127,7 +131,7 @@ $mappings = @(foreach ($name in $script:SignPathPayloadNames) {
     $originalPath = if ($name -eq 'MathGPT.Uninstaller.exe') { 'uninstaller-cache/' + $originalName } else { 'stage/' + $name }
     [ordered]@{ signingName = $name; originalName = $originalName; originalPath = $originalPath; unsignedSha256 = (Get-FileHash -LiteralPath $unsigned).Hash }
 })
-$mappingManifest = [ordered]@{ schemaVersion = 1; product = 'MathGPT'; version = '1.6.1'; runtime = 'win-x64'; mappings = $mappings }
+$mappingManifest = [ordered]@{ schemaVersion = 1; product = 'MathGPT'; version = $script:SignPathVersion; runtime = 'win-x64'; mappings = $mappings }
 Write-SignPathJson (Join-Path $mappingWorkspace 'payload-input.json') $mappingManifest
 Assert-Case 'mapped cache preserves the original name and raw digest' { $null = Read-SignPathManifest $mappingWorkspace }
 $mappingManifest.mappings[2].originalPath = '../../outside.exe'
@@ -152,8 +156,10 @@ foreach ($name in @('signpath-payload.xml', 'signpath-installer.xml')) {
         $xml = [xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot $name) -Raw -Encoding UTF8)
         if ($xml.DocumentElement.NamespaceURI -cne 'http://signpath.io/artifact-configuration/v1') { throw 'Wrong namespace.' }
         foreach ($node in $xml.SelectNodes('//*[local-name()="pe-file"]')) {
-            if ($node.GetAttribute('product-name') -cne 'MathGPT' -or $node.GetAttribute('product-version') -cne '1.6.1') { throw 'Missing identity restriction.' }
+            if ($node.GetAttribute('product-name') -cne 'MathGPT' -or $node.GetAttribute('product-version') -cne '${version}') { throw 'Missing identity restriction.' }
         }
+        $versionParameter = $xml.SelectSingleNode('//*[local-name()="parameter"][@name="version"]')
+        if ($null -eq $versionParameter -or $versionParameter.GetAttribute('required') -cne 'true') { throw 'Version must be a required signing parameter.' }
         if ($OfficialSchemaPath) {
             $settings = [Xml.XmlReaderSettings]::new()
             $settings.DtdProcessing = [Xml.DtdProcessing]::Prohibit
@@ -163,6 +169,13 @@ foreach ($name in @('signpath-payload.xml', 'signpath-installer.xml')) {
             $reader = [Xml.XmlReader]::Create((Join-Path $PSScriptRoot $name), $settings)
             try { while ($reader.Read()) { } } finally { $reader.Dispose() }
         }
+    }
+}
+Assert-Case 'manual workflow supplies a source version and minimal artifact read permission' {
+    $workflow = Get-Content -LiteralPath (Join-Path $PSScriptRoot '../../.github/workflows/windows-signpath.yml') -Raw -Encoding UTF8
+    if ($workflow -notmatch '(?m)^  actions: read\s*$' -or $workflow -notmatch 'id: signing_preflight' -or
+        ([regex]::Matches($workflow, 'version: "\$\{\{ steps\.signing_preflight\.outputs\.version \}\}"')).Count -ne 2) {
+        throw 'Both signing requests require the checked-out version and artifact read permission.'
     }
 }
 if ($PreparedWorkspace) {

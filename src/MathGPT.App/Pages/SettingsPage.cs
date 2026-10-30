@@ -21,11 +21,24 @@ public sealed class SettingsPage : UserControl
         void ShowUpdate(string message) => updateMessage.Text = message;
         Loaded += (_, _) => { updateMessage.Text = window.UpdateMessage; window.UpdateMessageChanged += ShowUpdate; };
         Unloaded += (_, _) => window.UpdateMessageChanged -= ShowUpdate;
+        var autoUpdates = new CheckBox { Content = "自动检查更新", IsChecked = services.Store.Network.AutomaticUpdates };
+        var autoAccount = new CheckBox { Content = "自动刷新账号", IsChecked = services.Store.Network.AutomaticAccountRefresh };
+        var networkNotice = Ui.Hint(NetworkPreferences.Notice); networkNotice.TextWrapping = TextWrapping.Wrap;
+        var networkStatus = Ui.Hint("尚未保存联网选择，自动功能暂不开启。");
+        networkStatus.Visibility = services.Store.Network.Configured ? Visibility.Collapsed : Visibility.Visible;
         Content = Ui.Stack(
             Ui.Card("软件更新",
                 Ui.Text("MathGPT " + (typeof(SettingsPage).Assembly.GetName().Version?.ToString(3) ?? "1.7.0"), 17),
                 updateMessage,
                 Ui.Button("检查更新", () => _ = window.CheckForUpdates())),
+            Ui.Card("联网选项",
+                networkNotice, networkStatus, autoUpdates, autoAccount,
+                Ui.Button("保存联网选项", () => _ = window.Run(ct =>
+                {
+                    services.Store.Network.Save(autoUpdates.IsChecked == true, autoAccount.IsChecked == true);
+                    networkStatus.Visibility = Visibility.Collapsed;
+                    return Task.CompletedTask;
+                }, "联网选项已保存。"))),
             Ui.Card("界面风格",
                 Ui.Hint("与 mathgpt.xyz 使用相同的轻紫、素白、纸感配色；右上角可切换明暗。"),
                 Ui.Actions(ThemeManager.Themes.Select(theme =>

@@ -15,6 +15,7 @@ internal static class Program
     {
         root = Path.GetFullPath(args.Length > 0 ? args[0] : "work/tests");
         Directory.CreateDirectory(root);
+        if (args.Contains("--network-preferences")) { await NetworkPreferencesAudit.Run(root); return 0; }
         if (args.Contains("--authenticode"))
         {
             await AuthenticodeAudit.Run(root, args.Skip(Array.IndexOf(args, "--authenticode") + 1).ToArray());

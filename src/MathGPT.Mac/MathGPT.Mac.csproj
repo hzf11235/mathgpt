@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <AssemblyName>MathGPT</AssemblyName>
-    <Version>1.8.2</Version>
+    <Version>1.8.3</Version>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
   <ItemGroup>

@@ -1,5 +1,11 @@
 # MathGPT 桌面端开发手册
 
+## 1.8.3 候选：自动联网选择
+
+`StateStore.Network` 统一 Windows/Mac 自动更新及账号刷新策略。未确认、未知格式或损坏的 `network-preferences.ini` 均禁止自动请求；手动操作独立保留。该文件只含两个布尔值和格式版本，存放在 StateStore 数据目录，不与账号/密钥的 settings.json 混写。帮助页显式保存；Inno 在同一安装向导内显示用途和两个选项，普通安装确认后通过 `--set-network-options 0|1 0|1` 本机入口保存，静默安装不写默认同意。更新不覆盖数据目录，因此选择保留。
+
+定向测试：`dotnet run --project tests/MathGPT.Tests -c Release -- <独立临时目录> --network-preferences`。测试使用拦截 HTTP 处理器，不访问外网或真实账号。Inno 可用 `/O-` 仅做语法校验、不生成安装包。Mac 需使用共享 DotNet9 编译现有 Avalonia 源码，再以 .NET8 执行需要的无头入口；这不等于 Mac 实机验收。
+
 ## Windows 安装检查
 
 WindowsAuthenticode.TrustedSigner 在只读文件锁内通过 WinVerifyTrust 验证签名，并从同一信任状态取出签名者，交给现有的厂商精确匹配逻辑。只接受返回值零，所有失败仍阻止安装；finally 关闭 WinTrust 状态并释放本机内存。它不启动 PowerShell。默认信任与撤销策略和旧 PowerShell WinVerifyTrust 路径保持一致，另设 WTD_DISABLE_MD2_MD4；不使用跳过策略、撤销检查或仅缓存网络的标志，不修改证书库、执行策略和安全软件设置。

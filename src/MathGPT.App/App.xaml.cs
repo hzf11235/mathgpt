@@ -23,6 +23,7 @@ public partial class App : Application
             var dataRoot = DefaultDataRoot();
             var dataIndex = Array.IndexOf(e.Args, "--data-dir");
             if (dataIndex >= 0 && dataIndex + 1 < e.Args.Length) dataRoot = e.Args[dataIndex + 1];
+            if (NetworkPreferences.ApplyCommand(e.Args, dataRoot)) { Shutdown(); return; }
             if (e.Args.Contains("--check-update-and-exit"))
             {
                 var code = await SelfUpdateEntry.CheckAndExit(AppContext.BaseDirectory, dataRoot,

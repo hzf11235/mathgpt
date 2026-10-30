@@ -47,7 +47,7 @@ public sealed class MainWindow : Window
     private CancellationTokenSource? catalogLoad;
     private CancellationTokenSource? clientDownload;
     private readonly CancellationTokenSource updateLifetime = new();
-    private readonly TextBlock updateStatus = new() { Text = "启动时自动检查，正常关闭后完成更新。", TextWrapping = TextWrapping.Wrap };
+    private readonly TextBlock updateStatus = new() { Text = "可手动检查更新，自动检查可在下方设置。", TextWrapping = TextWrapping.Wrap };
     private readonly Avalonia.Threading.DispatcherTimer updateTimer = new() { Interval = TimeSpan.FromHours(6) };
     private SelfUpdateService? selfUpdater;
     private bool checkingUpdate;
@@ -101,6 +101,16 @@ public sealed class MainWindow : Window
         installs.Children.Add(Action("运行本机自检", async () => { var report = await MacSelfCheck.Run(store.Root); Report(report.Summary); Open(report.Path); }));
         installs.Children.Add(Action("Mac 使用说明", () => { Open("https://mathgpt.xyz/docs/index.html#mac"); return Task.CompletedTask; }));
         installs.Children.Add(Card(Stack(Label("软件更新"), updateStatus, Action("检查 MathGPT 更新", () => CheckForUpdates(true)))));
+        var autoUpdates = new CheckBox { Content = "自动检查更新", IsChecked = store.Network.AutomaticUpdates };
+        var autoAccount = new CheckBox { Content = "自动刷新账号", IsChecked = store.Network.AutomaticAccountRefresh };
+        var networkStatus = new TextBlock { Text = "尚未保存联网选择，自动功能暂不开启。", IsVisible = !store.Network.Configured };
+        installs.Children.Add(Card(Stack(Label("联网选项"), new TextBlock { Text = NetworkPreferences.Notice, TextWrapping = TextWrapping.Wrap },
+            networkStatus, autoUpdates, autoAccount, Action("保存联网选项", () =>
+            {
+                store.Network.Save(autoUpdates.IsChecked == true, autoAccount.IsChecked == true);
+                networkStatus.IsVisible = false;
+                Report("联网选项已保存。"); return Task.CompletedTask;
+            }))));
         loginInputs = Stack(Label("登录账号"), username, password, entry, consent,
             Row(Action("登录", Login), Action("服务条款", () => { Open("https://mathgpt.xyz/user-agreement"); return Task.CompletedTask; }), Action("隐私政策", () => { Open("https://mathgpt.xyz/privacy-policy"); return Task.CompletedTask; })));
         verificationInputs = Stack(verification, Action("验证并登录", Verify));
@@ -129,9 +139,9 @@ public sealed class MainWindow : Window
             try
             {
                 if (OperatingSystem.IsMacOS()) { await clients.InstallSelf(); installedSelf = true; }
-                if (site.SignedIn) await RefreshAccount();
+                if (site.SignedIn) await store.Network.RunAutomatic(AutomaticNetworkOperation.AccountRefresh, RefreshAccount);
                 else RefreshAccountControls();
-                if (store.Key(profile) is not null) await LoadSelected(profile);
+                if (store.Network.Allows(AutomaticNetworkOperation.AccountRefresh) && store.Key(profile) is not null) await LoadSelected(profile);
             }
             catch (Exception e) { Report(Privacy.Friendly(e)); }
             if (installedSelf) { _ = CheckForUpdates(false); updateTimer.Start(); }
@@ -160,6 +170,7 @@ public sealed class MainWindow : Window
     });
     private async Task CheckForUpdates(bool showStatus)
     {
+        if (!showStatus && !store.Network.Allows(AutomaticNetworkOperation.Updates)) return;
         if (checkingUpdate || closed) return;
         checkingUpdate = true;
         try

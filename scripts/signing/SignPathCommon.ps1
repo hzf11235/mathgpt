@@ -1,7 +1,10 @@
 #requires -Version 7.0
 # Shared, offline helpers. This file never submits data to a signing service.
 $ErrorActionPreference = 'Stop'
-$script:SignPathVersion = '1.6.1'
+$script:SignPathVersion = [string]([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot '../../Directory.Build.props') -Raw -Encoding UTF8)).Project.PropertyGroup.Version
+if ($script:SignPathVersion -notmatch '\A\d+\.\d+\.\d+\z') {
+    throw 'Directory.Build.props must contain a numeric three-part release Version before signing.'
+}
 $script:SignPathPayloadNames = @('MathGPT.exe', 'MathGPT.Bridge.exe', 'MathGPT.Uninstaller.exe')
 
 function Assert-SignPathPreflight {

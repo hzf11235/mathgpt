@@ -17,7 +17,7 @@ $Workspace = [IO.Path]::GetFullPath($Workspace)
 Assert-SignPathUnlinkedPath $Workspace
 $root = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $version = [string]([xml](Get-Content -LiteralPath (Join-Path $root 'Directory.Build.props') -Raw -Encoding UTF8)).Project.PropertyGroup.Version
-if ($version -cne $script:SignPathVersion) { throw 'This reviewed workflow is restricted to MathGPT 1.6.1.' }
+if ($version -cne $script:SignPathVersion) { throw 'The source release version changed after the signing helpers were loaded.' }
 if ($Step -ne 'Finalize') {
     if (-not $InnoCompilerPath) { $InnoCompilerPath = (Get-Command ISCC.exe -CommandType Application -ErrorAction Stop).Source }
     if (-not (Test-Path -LiteralPath $InnoCompilerPath -PathType Leaf)) { throw 'The pinned Inno compiler is missing.' }

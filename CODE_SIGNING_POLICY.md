@@ -1,6 +1,6 @@
 # Code signing policy
 
-**Status: not enrolled or approved for SignPath Foundation signing.** No current release is represented as signed by the Foundation. Version 1.7.1 portable distributions remain unsigned; 1.6.1 signing configuration is retained without a claim of enrollment. The Ed25519 update feed authenticates update packages; it does not grant Windows publisher trust or Apple notarization.
+**Status: not enrolled or approved for SignPath Foundation signing.** No current release is represented as signed by the Foundation. Published version 1.8.2 remains unsigned. Signing configuration follows the checked-out release metadata, without a claim of enrollment. The Ed25519 update feed authenticates update packages; it does not grant Windows publisher trust or Apple notarization.
 
 MathGPT is preparing an application for the Foundation's free open-source signing program. This document does not assert approval, sponsorship, or a signing partnership.
 
@@ -16,9 +16,9 @@ MathGPT is preparing an application for the Foundation's free open-source signin
 
 ## Privacy
 
-The desktop client stores user-supplied API credentials in Windows DPAPI or macOS Keychain. It connects to the API endpoints chosen by the user; website pairing and client installation are initiated by the user. Complete, unmodified Codex and Claude packages use MathGPT distribution paths with pinned hashes and original publisher verification; other official-client downloads retain the vendor source. Download requests do not carry API keys or account sessions. No private server deployment configuration, payment data or signing credential belongs in the public source or distribution.
+The desktop client stores user-supplied API credentials in Windows DPAPI or macOS Keychain. It connects to the API endpoints chosen by the user; website pairing and client installation are initiated by the user. The unpublished 1.8.3 candidate discloses automatic update and account-refresh traffic in the installer and provides separate controls. Without confirmed choices these automatic operations remain off; manual requests remain available. Complete, unmodified Codex and Claude packages use MathGPT distribution paths with pinned hashes and original publisher verification; other official-client downloads retain the vendor source. Download requests do not carry API keys or account sessions. No private server deployment configuration, payment data or signing credential belongs in the public source or distribution. See [the candidate privacy description](docs/PRIVACY.md).
 
-Any future automatic collection or transfer beyond user-requested operations requires a corresponding privacy update and appropriate user controls. Installation and client configuration must explain their system changes and provide removal or restoration paths.
+The new privacy controls still require release acceptance before the candidate replaces 1.8.2. Foundation enrollment, public repository authorization, MFA and named signing roles remain outstanding. Installation and client configuration explain their system changes and provide removal or restoration paths.
 
 ## If the Foundation accepts the project
 

@@ -159,7 +159,8 @@ public sealed class ConnectionsPage : UserControl
         if (services.Site.Account is { } current) account.Text = $"{current.Name} · 余额 ¥{current.Balance:0.####}";
         Loaded += (_, _) =>
         {
-            if (services.Site.SignedIn) _ = window.Run(RefreshAccount, "账号、余额与密钥已自动同步。", true);
+            if (services.Store.Network.Allows(AutomaticNetworkOperation.AccountRefresh) && services.Site.SignedIn)
+                _ = window.Run(RefreshAccount, "账号、余额与密钥已自动同步。", true);
         };
     }
     public void UpdateAccountLabel()

@@ -16,6 +16,7 @@ internal static class Program
             if (SelfUpdateService.TryRunApplyWorker(args).GetAwaiter().GetResult()) return Environment.ExitCode;
             var index = Array.IndexOf(args, "--data-dir");
             if (index >= 0 && index + 1 < args.Length) Root = SafeFiles.DirectoryPath(args[index + 1]);
+            if (NetworkPreferences.ApplyCommand(args, Root)) return 0;
             if (args.Contains("--check-update-and-exit"))
             {
                 var bundle = Directory.GetParent(Environment.ProcessPath ?? "")?.Parent?.Parent?.FullName
